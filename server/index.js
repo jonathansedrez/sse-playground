@@ -7,7 +7,9 @@ app.use((req, res, next) => {
 });
 
 app.get("/events", (req, res) => {
-  res.send({ message: "ok" });
+  res.setHeader("Content-Type", "text/event-stream");
+
+  setInterval(res.write(`data: ${new Date().toISOString()}`), 1000);
 });
 
 app.listen(3000, () => console.log("SSE on http://localhost:3000/events"));
