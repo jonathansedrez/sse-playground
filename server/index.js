@@ -9,7 +9,14 @@ app.use((req, res, next) => {
 app.get("/events", (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
 
-  setInterval(res.write(`data: ${new Date().toISOString()}`), 1000);
+  const interval = setInterval(() => {
+    res.write("data: teste\n\n"); // \n and data: is required to work
+  }, 2000);
+
+  req.on("close", () => {
+    clearInterval(interval);
+    res.end();
+  });
 });
 
 app.listen(3000, () => console.log("SSE on http://localhost:3000/events"));

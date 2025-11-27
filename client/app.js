@@ -1,11 +1,21 @@
 const connectBtn = document.getElementById("connectBtn");
 
-connectBtn.addEventListener("click", async () => {
-  try {
-    const response = await fetch("http://localhost:3000/events");
+let sse;
 
-    console.log(response);
-  } catch (error) {
-    console.log(error);
-  }
+connectBtn.addEventListener("click", () => {
+  if (sse) return;
+
+  sse = new EventSource("http://localhost:3000/events");
+
+  sse.onopen = () => {
+    console.log("Connection opened");
+  };
+
+  sse.onmessage = (event) => {
+    console.log("event", event);
+  };
+
+  sse.onerror = (error) => {
+    console.error("Connection error:", error);
+  };
 });
