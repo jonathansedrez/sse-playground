@@ -10,7 +10,8 @@ app.get("/events", (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
 
   const interval = setInterval(() => {
-    res.write("data: teste\n\n"); // \n and data: is required to work
+    const currentDate = new Date();
+    res.write(`data: ${currentDate.toISOString()}\n\n`); // \n and data: is required to work
   }, 2000);
 
   req.on("close", () => {
