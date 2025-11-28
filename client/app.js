@@ -18,8 +18,6 @@ connectBtn.addEventListener("click", () => {
     document.body.appendChild(p);
   };
 
-  sse.close;
-
   sse.onerror = (error) => {
     console.error("Connection error:", error);
   };
