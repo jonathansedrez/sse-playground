@@ -26,7 +26,6 @@ connectBtn.addEventListener("click", () => {
 });
 
 disconnectBtn.addEventListener("click", () => {
-  debugger;
   if (!sse) return;
   console.log("Connection closed");
   sse.close();
