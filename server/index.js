@@ -8,6 +8,8 @@ app.use((req, res, next) => {
 
 app.get("/events", (req, res) => {
   res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache"); // prevent default cache from browser
+  res.setHeader("Connection", "keep-alive"); //prevent connection to closed during quiet periods
 
   const interval = setInterval(() => {
     const currentDate = new Date();
