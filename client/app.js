@@ -13,7 +13,9 @@ connectBtn.addEventListener("click", () => {
   };
 
   sse.onmessage = (event) => {
-    console.log("event", event);
+    const p = document.createElement("p");
+    p.textContent = event.data;
+    document.body.appendChild(p);
   };
 
   sse.close;
